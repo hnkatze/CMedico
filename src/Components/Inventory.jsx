@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { FaTrash, FaEdit } from 'react-icons/fa';
-import './Inventory.css';
+import './css/Inventory.css';
 import{ db } from "../config/firebase";
 import { getDocs, collection, addDoc} from 'firebase/firestore'
 import { deleteProduct } from './helpers/deleteProduct';
+import { addProduct } from './helpers/addproduct';
 import { updateAmount, updateEndDate, updateName } from './helpers/updateProduct';
 
 
@@ -69,21 +70,18 @@ const handleUpdate = async () => {
 
 const onSubmitProduct = async () => {
   try {
-    await addDoc(productCollectionRef, {
+    const newProductData = {
       name: newProductName,
       brand: newProductBrand,
       amount: newProductAmount,
       endDate: newProductEndDate
-    });
+    };
 
+    await addProduct(productCollectionRef, newProductData); 
     
     const newProduct = {
-      name: newProductName,
-      brand: newProductBrand,
-      amount: newProductAmount,
-      endDate: newProductEndDate,
-      id: Math.random().toString() 
-        
+      ...newProductData,
+      id: Math.random().toString()
     };
 
     setProductList(prevList => [...prevList, newProduct]);
@@ -119,44 +117,7 @@ return (
 
 <button onClick={openModal}>Agregar Producto</button>
       
-      {isModalOpen && (
-        <div className="modal">
-          <div className="form-container">
-            <input
-              className="form-input"
-              placeholder="Nombre del Producto..."
-              required
-              title='Ingrese El Nombre.'
-              onChange={(e) => setNewProductName(e.target.value)}
-            />
-            <input
-              className="form-input"
-              placeholder="Marca..."
-              required
-              title='Ingrese La Marca '
-              onChange={(e) => setNewProductBrand(e.target.value)}
-            />
-            <input
-              className="form-input"
-              placeholder="Cantidad en existencia..."
-              type="number"
-              required
-              title='Ingrese una cantidad..'
-              onChange={(e) => setNewProductAmount(Number(e.target.value))}
-            />
-            <input
-              className="form-input"
-              placeholder="Fecha vencimiento = 10/01/2023..."
-              required
-              title='Ingrese La Fecha De Vencimiento'
-              onChange={(e) => setNewProductEndDate(e.target.value)}
-              
-            />
-            <button className="submit-button" onClick={onSubmitProduct}>Agregar Producto</button>
-            <button className="close-button" onClick={closeModal}>Cerrar</button>
-          </div>
-        </div>
-      )}
+    <addProduct  isOpen= , onClose=  onSubmit = />
    
 
    <div className="product-list">
