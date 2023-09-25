@@ -67,30 +67,41 @@ const handleUpdate = async () => {
   }
 };
 
-const onSubmitProduct = async () => {
-  try {
-    await addDoc(productCollectionRef, {
-      name: newProductName,
-      brand: newProductBrand,
-      amount: newProductAmount,
-      endDate: newProductEndDate
-    });
+// const onSubmitProduct = async () => {
+//   try {
+//     const newProductData = {
+//       name: newProductName,
+//       brand: newProductBrand,
+//       amount: newProductAmount,
+//       endDate: newProductEndDate
+//     };
 
+//     await addProduct(productCollectionRef, newProductData); 
     
-    const newProduct = {
-      name: newProductName,
-      brand: newProductBrand,
-      amount: newProductAmount,
-      endDate: newProductEndDate,
-      id: Math.random().toString() 
-        
-    };
+//     const newProduct = {
+//       ...newProductData,
+//       id: Math.random().toString()
+//     };
 
-    setProductList(prevList => [...prevList, newProduct]);
-  } catch (err) {
-    console.error(err);
+//     setProductList(prevList => [...prevList, newProduct]);
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };
+const handleAddProduct = async (newProductData) => {
+  try {    
+    await addDoc(productCollectionRef, newProductData);
+    closeModal();
+    const newProduct = {
+             ...newProductData,
+             id: Math.random().toString()
+           };
+    setProductList(prevList => [...prevList, newProductData]);
+  } catch (error) {
+    console.error("Error al agregar el producto:", error);
   }
 };
+
 
 const [searchTerm, setSearchTerm] = useState("");
 const handleSearchChange = (e) => {
@@ -119,46 +130,8 @@ return (
 
 <button onClick={openModal}>Agregar Producto</button>
       
-      {isModalOpen && (
-        <div className="modal">
-          <div className="form-container">
-            <input
-              className="form-input"
-              placeholder="Nombre del Producto..."
-              required
-              title='Ingrese El Nombre.'
-              onChange={(e) => setNewProductName(e.target.value)}
-            />
-            <input
-              className="form-input"
-              placeholder="Marca..."
-              required
-              title='Ingrese La Marca '
-              onChange={(e) => setNewProductBrand(e.target.value)}
-            />
-            <input
-              className="form-input"
-              placeholder="Cantidad en existencia..."
-              type="number"
-              required
-              title='Ingrese una cantidad..'
-              onChange={(e) => setNewProductAmount(Number(e.target.value))}
-            />
-            <input
-              className="form-input"
-              placeholder="Fecha vencimiento = 10/01/2023..."
-              required
-              title='Ingrese La Fecha De Vencimiento'
-              onChange={(e) => setNewProductEndDate(e.target.value)}
-              
-            />
-            <button className="submit-button" onClick={onSubmitProduct}>Agregar Producto</button>
-            <button className="close-button" onClick={closeModal}>Cerrar</button>
-          </div>
-        </div>
-      )}
+    <addProduct  isOpen={openModal} onClose={closeModal}  onSubmit ={handleAddProduct} />
    
-
    <div className="product-list">
   <table>
   <thead>
