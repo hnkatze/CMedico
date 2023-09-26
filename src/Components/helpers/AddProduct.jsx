@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 function AddProduct({ isopen, onclose, onSubmit })
 {  
-  const [getDate,setDate] = useState();
+  const [startDate, setStartDate] = useState(new Date());
   const [newProductName, setNewProductName] = useState("");
   const [newProductBrand, setNewProductBrand] = useState("");
   const [newProductAmount, setNewProductAmount] = useState(0);
@@ -21,6 +21,13 @@ function AddProduct({ isopen, onclose, onSubmit })
     onSubmit(newProductData);
   };
 
+  const dateget = (startDate) => {
+    const dia = startDate.getDate();
+    const mes = startDate.getMonth() + 1;
+    const year = startDate.getFullYear();
+  
+    return dia + "/" + mes + "/" + year;
+  }
   return (
     
     isopen && (
@@ -48,14 +55,19 @@ function AddProduct({ isopen, onclose, onSubmit })
             title='Ingrese una cantidad..'
             onChange={(e) => setNewProductAmount(Number(e.target.value))}
           />
-          <input
+          <div>
+          <label htmlFor="">Fecha De Vencimiento</label>
+         <DatePicker selected={startDate} onChange={(e) => {setStartDate(e); setNewProductEndDate(dateget(e));}} />
+          </div>
+       
+          {/* <input
             className="form-input"
             placeholder="Fecha vencimiento = 10/01/2023..."
             required
             title='Ingrese La Fecha De Vencimiento'
             onChange={(e) => setNewProductEndDate(e.target.value)}
             
-          />
+          /> */}
           <button className="submit-button" onClick={handleSubmit}>Agregar Producto</button>
           <button className="close-button" onClick={onclose}>Cerrar</button>
         </div>
