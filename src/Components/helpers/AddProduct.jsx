@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
-function addProduct({ isOpen, onClose, onSubmit }) {
+function AddProduct({ isopen, onclose, onSubmit })
+{  
+  const [getDate,setDate] = useState();
   const [newProductName, setNewProductName] = useState("");
   const [newProductBrand, setNewProductBrand] = useState("");
   const [newProductAmount, setNewProductAmount] = useState(0);
@@ -18,7 +22,8 @@ function addProduct({ isOpen, onClose, onSubmit }) {
   };
 
   return (
-    isOpen && (
+    
+    isopen && (
         <div className="modal">
         <div className="form-container">
           <input
@@ -52,11 +57,11 @@ function addProduct({ isOpen, onClose, onSubmit }) {
             
           />
           <button className="submit-button" onClick={handleSubmit}>Agregar Producto</button>
-          <button className="close-button" onClick={closeModal}>Cerrar</button>
+          <button className="close-button" onClick={onclose}>Cerrar</button>
         </div>
       </div>
     )
   );
 }
 
-export default addProduct;
+export default AddProduct;
