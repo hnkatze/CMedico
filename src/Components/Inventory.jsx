@@ -2,25 +2,17 @@ import { useEffect, useState } from 'react';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 import './css/Inventory.css';
 import{ db } from "../config/firebase";
+import AddProduct from './helpers/AddProduct';
 import { getDocs, collection, addDoc} from 'firebase/firestore'
 import { deleteProduct } from './helpers/deleteProduct';
 import { addProduct } from './helpers/addproduct';
 import { updateAmount, updateEndDate, updateName } from './helpers/updateProduct';
-
-
 
 function Inventory() {
   const [productList, setProductList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalUpOpen, setIsModalUpOpen] = useState(false);
   const productCollectionRef = collection(db, "products");
-
-const [newProductName, setNewProductName] = useState("");
-const [newProductBrand, setNewProductBrand] = useState("");
-const [newProductAmount, setNewProductAmount] = useState(0);
-const [newProductEndDate, setNewProductEndDate] = useState(0);
-
-
 
 const [updateProductName, setUpdateProductName] = useState("");
 const [updateProductAmount, setUpdateProductAmount] = useState(0);
@@ -29,11 +21,13 @@ const [updateProductEndDate, setUpdateProductEndDate] = useState("");
 const [editingProductId, setEditingProductId] = useState(null);
 
 const openModal = () => {
-    setIsModalOpen(true);
-  };
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  setIsModalOpen(true);
+  console.log("si pasa");
+};
+
+const closeModal = () => {
+  setIsModalOpen(false);
+}
   const openModalUp = (productId) => {
     setEditingProductId(productId);
     setIsModalUpOpen(true);
@@ -68,25 +62,19 @@ const handleUpdate = async () => {
   }
 };
 
-const onSubmitProduct = async () => {
-  try {
-    const newProductData = {
-      name: newProductName,
-      brand: newProductBrand,
-      amount: newProductAmount,
-      endDate: newProductEndDate
-    };
 
-    await addProduct(productCollectionRef, newProductData); 
-    
+const handleAddProduct = async (newProductData) => {
+  try {    
+    await addDoc(productCollectionRef, newProductData);
+    closeModal();
     const newProduct = {
-      ...newProductData,
-      id: Math.random().toString()
-    };
+             ...newProductData,
+             id: Math.random().toString()
+           };
+    setProductList(prevList => [...prevList, newProductData]);
+  } catch (error) {
+    console.error("Error al agregar el producto:", error);
 
-    setProductList(prevList => [...prevList, newProduct]);
-  } catch (err) {
-    console.error(err);
   }
 };
 
@@ -104,7 +92,6 @@ const filteredProducts = searchTerm
   : productList;
 
 return (
-
 <>
 <div className="Inventory">
 <input
@@ -114,13 +101,12 @@ return (
   onChange={handleSearchChange}
   className="search-input" // Agrega la clase CSS aquí
 />
-
+<div>
 <button onClick={openModal}>Agregar Producto</button>
-      
-    <addProduct  isOpen= , onClose=  onSubmit = />
-   
+<AddProduct isopen={isModalOpen} onclose={closeModal} onSubmit ={handleAddProduct} />
+</div>
+  <div className="product-list">
 
-   <div className="product-list">
   <table>
   <thead>
     <tr>
@@ -182,10 +168,8 @@ return (
     </div>
   </div>
 )}
-
-    </div>
-
-    </>
+  </div>
+  </>
 );
 
 }

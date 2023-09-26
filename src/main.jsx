@@ -1,13 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-
-//import Login from './Components/login.jsx'
-//import Inventory from './Components/Inventory.jsx'
-import Navy from './Components/navbar.jsx'
+import Navy from './Components/Navbar.jsx'
+import Inventory from './Components/Inventory.jsx'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Navy />
+    <Navy/>
+    <Inventory />
   </React.StrictMode>,
 )
