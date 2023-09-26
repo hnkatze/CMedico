@@ -5,6 +5,7 @@ import{ db } from "../config/firebase";
 import AddProduct from './helpers/AddProduct';
 import { getDocs, collection, addDoc} from 'firebase/firestore'
 import { deleteProduct } from './helpers/deleteProduct';
+import { addProduct } from './helpers/addproduct';
 import { updateAmount, updateEndDate, updateName } from './helpers/updateProduct';
 
 function Inventory() {
@@ -61,6 +62,7 @@ const handleUpdate = async () => {
   }
 };
 
+
 const handleAddProduct = async (newProductData) => {
   try {    
     await addDoc(productCollectionRef, newProductData);
@@ -72,6 +74,7 @@ const handleAddProduct = async (newProductData) => {
     setProductList(prevList => [...prevList, newProductData]);
   } catch (error) {
     console.error("Error al agregar el producto:", error);
+
   }
 };
 
@@ -103,6 +106,7 @@ return (
 <AddProduct isopen={isModalOpen} onclose={closeModal} onSubmit ={handleAddProduct} />
 </div>
   <div className="product-list">
+
   <table>
   <thead>
     <tr>
