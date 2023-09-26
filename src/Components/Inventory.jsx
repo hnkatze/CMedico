@@ -5,20 +5,20 @@ import{ db } from "../config/firebase";
 import AddProduct from './helpers/AddProduct';
 import { getDocs, collection, addDoc} from 'firebase/firestore'
 import { deleteProduct } from './helpers/deleteProduct';
-import { addProduct } from './helpers/addproduct';
 import { updateAmount, updateEndDate, updateName } from './helpers/updateProduct';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function Inventory() {
   const [productList, setProductList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalUpOpen, setIsModalUpOpen] = useState(false);
   const productCollectionRef = collection(db, "products");
-
-const [updateProductName, setUpdateProductName] = useState("");
-const [updateProductAmount, setUpdateProductAmount] = useState(0);
-const [updateProductEndDate, setUpdateProductEndDate] = useState("");
-
-const [editingProductId, setEditingProductId] = useState(null);
+  const [updateProductName, setUpdateProductName] = useState("");
+  const [updateProductAmount, setUpdateProductAmount] = useState(0);
+  const [updateProductEndDate, setUpdateProductEndDate] = useState("");
+  const [editingProductId, setEditingProductId] = useState(null);
+  const [startDate, setStartDate] = useState(new Date());
 
 const openModal = () => {
   setIsModalOpen(true);
@@ -71,7 +71,7 @@ const handleAddProduct = async (newProductData) => {
              ...newProductData,
              id: Math.random().toString()
            };
-    setProductList(prevList => [...prevList, newProductData]);
+    setProductList(prevList => [...prevList, newProduct]);
   } catch (error) {
     console.error("Error al agregar el producto:", error);
 
@@ -90,6 +90,14 @@ const filteredProducts = searchTerm
       );
     })
   : productList;
+
+  const dateget = (startDate) => {
+    const dia = startDate.getDate();
+    const mes = startDate.getMonth() + 1;
+    const year = startDate.getFullYear();
+  
+    return dia + "/" + mes + "/" + year;
+  }
 
 return (
 <>
@@ -153,12 +161,17 @@ return (
         value={updateProductAmount}
         onChange={(e) => setUpdateProductAmount(e.target.value)}
       />
-      <input
+
+<div>
+          <label htmlFor="">Cambiar Fecha De Vencimiento</label>
+         <DatePicker selected={startDate} onChange={(e) => {setStartDate(e); setUpdateProductEndDate(dateget(e));}} />
+          </div>
+      {/* <input
         className="form-input"
         placeholder="Cambie Fecha de Vencimiento..."
         value={updateProductEndDate}
         onChange={(e) => setUpdateProductEndDate(e.target.value)}
-      />
+      /> */}
       <button className="submit-button" onClick={handleUpdate}>
         Actualizar
       </button>
