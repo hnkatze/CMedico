@@ -1,0 +1,62 @@
+/* Style the container div for the form */
+.consulta-form-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Style the heading */
+  .consulta-form-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Style the form labels and inputs */
+  .consulta-form-container label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .consulta-form-container input[type="text"],
+  .consulta-form-container input[type="date"],
+  .consulta-form-container input[type="time"],
+  .consulta-form-container textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  /* Style the submit button */
+  .consulta-form-container button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  .consulta-form-container button[type="button"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .consulta-form-container button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  .consulta-form-container button[type="button"]:hover {
+    background-color: #0056b3;
+  }
+  
