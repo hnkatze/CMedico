@@ -17,7 +17,6 @@ function AddProduct({ isopen, onclose, onSubmit })
       amount: newProductAmount,
       endDate: newProductEndDate
     };
-    
     onSubmit(newProductData);
   };
 
@@ -25,7 +24,6 @@ function AddProduct({ isopen, onclose, onSubmit })
     const dia = startDate.getDate();
     const mes = startDate.getMonth() + 1;
     const year = startDate.getFullYear();
-  
     return dia + "/" + mes + "/" + year;
   }
   return (

@@ -22,7 +22,7 @@ function Inventory() {
 
 const openModal = () => {
   setIsModalOpen(true);
-  console.log("si pasa");
+  
 };
 
 const closeModal = () => {
