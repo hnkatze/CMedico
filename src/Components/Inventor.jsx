@@ -2,14 +2,15 @@ import { useEffect, useState } from 'react';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 import './css/Inventory.css';
 import{ db } from "../config/firebase";
-import AddProduct from './helpers/AddProduct';
 import { getDocs, collection, addDoc} from 'firebase/firestore'
 import { deleteProduct } from './helpers/deleteProduct';
 import { updateAmount, updateEndDate, updateName } from './helpers/updateProduct';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Navy from './navbar';
+import AddProduct from './helpers/AddProduct';
 
-function Inventory() {
+function Inventor() {
   const [productList, setProductList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalUpOpen, setIsModalUpOpen] = useState(false);
@@ -20,20 +21,16 @@ function Inventory() {
   const [editingProductId, setEditingProductId] = useState(null);
   const [startDate, setStartDate] = useState(new Date());
 
-const openModal = () => {
-  setIsModalOpen(true);
-  
-};
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
-const closeModal = () => {
-  setIsModalOpen(false);
-}
   const openModalUp = (productId) => {
     setEditingProductId(productId);
     setIsModalUpOpen(true);
   }; 
   const closeModalUp = () => {
-    setEditingProductId(null); // Limpia el ID de edición al cerrar el modal
+    setEditingProductId(null); 
     setIsModalUpOpen(false);
   };
   const getProductList = async (setProductList) => {
@@ -47,7 +44,7 @@ const closeModal = () => {
   };  
 useEffect(() => {
    getProductList(setProductList);
-}, []);
+},[]);
 
 const handleUpdate = async () => {
   try {
@@ -66,12 +63,12 @@ const handleUpdate = async () => {
 const handleAddProduct = async (newProductData) => {
   try {    
     await addDoc(productCollectionRef, newProductData);
-    closeModal();
     const newProduct = {
              ...newProductData,
              id: Math.random().toString()
            };
     setProductList(prevList => [...prevList, newProduct]);
+    setIsModalOpen(false);
   } catch (error) {
     console.error("Error al agregar el producto:", error);
 
@@ -101,6 +98,7 @@ const filteredProducts = searchTerm
 
 return (
 <>
+<Navy/>
 <div className="Inventory">
 <input
   type="text"
@@ -109,12 +107,8 @@ return (
   onChange={handleSearchChange}
   className="search-input" // Agrega la clase CSS aquí
 />
-<div>
-<button onClick={openModal}>Agregar Producto</button>
-<AddProduct isopen={isModalOpen} onclose={closeModal} onSubmit ={handleAddProduct} />
-</div>
+<button type='button' onClick={openModal}>Agregar Producto</button>
   <div className="product-list">
-
   <table>
   <thead>
     <tr>
@@ -136,7 +130,7 @@ return (
             <button className="delete-button" onClick={() => deleteProduct(setProductList,product.id)}>
               <FaTrash />
             </button>
-            <button className="update-button" onClick={() => openModalUp(product.id)}>
+            <button type='button' className="update-button" onClick={() => openModalUp(product.id)}>
               <FaEdit />
             </button>
           </td>
@@ -145,8 +139,8 @@ return (
     </tbody>
 </table>
     </div>
-
-    {isModalUpOpen && (
+  </div>
+  {isModalUpOpen && (
   <div className="modal">
     <div className="form-container">
       <input
@@ -161,17 +155,10 @@ return (
         value={updateProductAmount}
         onChange={(e) => setUpdateProductAmount(e.target.value)}
       />
-
-<div>
+      <div>
           <label htmlFor="">Cambiar Fecha De Vencimiento</label>
          <DatePicker selected={startDate} onChange={(e) => {setStartDate(e); setUpdateProductEndDate(dateget(e));}} />
           </div>
-      {/* <input
-        className="form-input"
-        placeholder="Cambie Fecha de Vencimiento..."
-        value={updateProductEndDate}
-        onChange={(e) => setUpdateProductEndDate(e.target.value)}
-      /> */}
       <button className="submit-button" onClick={handleUpdate}>
         Actualizar
       </button>
@@ -181,10 +168,10 @@ return (
     </div>
   </div>
 )}
-  </div>
+  <AddProduct isopen = {isModalOpen} onclose={setIsModalOpen} onSubmit ={handleAddProduct} />
   </>
 );
 
 }
 
-export default Inventory;
+export default Inventor;
