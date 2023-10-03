@@ -140,7 +140,7 @@ return (
 </table>
     </div>
   </div>
-  {isModalUpOpen && (
+  <dialog open={isModalUpOpen}>
   <div className="modal">
     <div className="form-container">
       <input
@@ -167,7 +167,7 @@ return (
       </button>
     </div>
   </div>
-)}
+  </dialog>
   <AddProduct isopen = {isModalOpen} onclose={setIsModalOpen} onSubmit ={handleAddProduct} />
   </>
 );

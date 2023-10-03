@@ -5,6 +5,7 @@ import { getDocs, collection } from "firebase/firestore";
 import{ db } from "../config/firebase";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { deleteConsulta } from "./helpers/deleteConsulta";
+import '../Components/css/consulta.css'
 
 const Consulta = () => {
 const [isOpen, setOpen] = useState(false);
@@ -55,26 +56,26 @@ const filteredProducts = searchTerm
   return(
     <>
     <Navy />
-    <div>
-    <input
-      type="text"
-      placeholder="Buscar producto..."
-      value={searchTerm}
-      onChange={handleSearchChange}
-      className="search-input" // Agrega la clase CSS aquí
-    />
-    <button onClick={openModal}>Crear Consulta</button>
-    <table>
-  <thead>
-    <tr>
-   
-      <th>Nombre</th>
-      <th>Apellido</th>
-      <th>Fecha</th>
-      <th>Hora/Ingreso</th>
-    </tr>
-  </thead>
-  <tbody>
+    <div className="component-container">
+  <input
+    type="text"
+    placeholder="Buscar producto..."
+    value={searchTerm}
+    onChange={handleSearchChange}
+    className="search-input"
+  />
+  <button onClick={openModal}>Crear Consulta</button>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Fecha</th>
+        <th>Hora/Ingreso</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
       {filteredProducts.map((consultas) => (
         <tr key={consultas.id}>
           <td>{consultas.name}</td>
@@ -82,7 +83,7 @@ const filteredProducts = searchTerm
           <td>{consultas.date}</td>
           <td>{consultas.time}</td>
           <td>
-            <button className="delete-button" onClick={() => deleteConsulta(setProductList,consultas.id)}>
+            <button className="delete-button" onClick={() => deleteConsulta(setProductList, consultas.id)}>
               <FaTrash />
             </button>
             <button type='button' className="update-button" onClick={() => openModalUp(consultas.id)}>
@@ -92,11 +93,13 @@ const filteredProducts = searchTerm
         </tr>
       ))}
     </tbody>
-</table>
-    
-    <AddConsulta isOpen = {isOpen} isClose = {closeModal} />
+  </table>
+  <dialog className="dialog" open={isOpen}>
+  <AddConsulta isClose={closeModal} />
+  </dialog>
+  
+</div>
 
-    </div>
     
     </>
 

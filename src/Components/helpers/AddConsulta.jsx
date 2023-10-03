@@ -1,7 +1,7 @@
 import { useState } from "react";
-import '../css/consulta.css'
+import '../css/addconsulta.css'
 
-function AddConsulta({isOpen, isClose, }){
+function AddConsulta({ isClose }){
  const [nombre, setNombre] = useState('');
  const [apellido, setApellido] = useState('');
  const [fecha, setFecha] = useState('');
@@ -18,9 +18,8 @@ function AddConsulta({isOpen, isClose, }){
  };
 
  return (
-  isOpen && (
-    <div className="consulta-form-container">
-  <h1>Agregar Consulta</h1>
+  <div className="consulta-form-container">
+    <h1>Agregar Consulta</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Nombre:
@@ -55,7 +54,6 @@ function AddConsulta({isOpen, isClose, }){
         <button type="button" onClick={isClose}>Cerrar</button>
     </form>
     </div>
- )
  ); 
 }
 

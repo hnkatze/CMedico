@@ -1,62 +1,87 @@
-/* Style the container div for the form */
-.consulta-form-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-  }
-  
-  /* Style the heading */
-  .consulta-form-container h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  /* Style the form labels and inputs */
-  .consulta-form-container label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-  }
-  
-  .consulta-form-container input[type="text"],
-  .consulta-form-container input[type="date"],
-  .consulta-form-container input[type="time"],
-  .consulta-form-container textarea {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-  }
-  
-  /* Style the submit button */
-  .consulta-form-container button[type="submit"] {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-right: 10px;
-  }
-  .consulta-form-container button[type="button"] {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  .consulta-form-container button[type="submit"]:hover {
-    background-color: #0056b3;
-  }
-  .consulta-form-container button[type="button"]:hover {
-    background-color: #0056b3;
-  }
-  
+/* Estilos para el campo de búsqueda */
+.search-input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Estilos para el botón de crear consulta */
+button {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Estilos para la tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+/* Estilos para los botones de acción en la tabla */
+.delete-button, .update-button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.update-button {
+  background-color: #3498db;
+}
+
+/* Estilos para el componente de búsqueda y tabla */
+.component-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+/* Estilos para los detalles del producto */
+.product-details {
+  display: flex;
+  align-items: center;
+}
+
+.product-name, .product-Amount, .product-brand, .product-endDate {
+  margin-right: 10px;
+}
+
+/* Estilos para el botón de cierre del modal */
+.close-button {
+  background-color: #ccc;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  background-color: #999;
+}
+.dialog{
+  border: 0;
+}
