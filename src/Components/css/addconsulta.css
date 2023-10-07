@@ -25,6 +25,7 @@
   .consulta-form-container input[type="text"],
   .consulta-form-container input[type="date"],
   .consulta-form-container input[type="time"],
+  .consulta-form-container input[type="number"],
   .consulta-form-container textarea {
     width: 100%;
     padding: 8px;
