@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useParams } from 'react-router-dom';
-import { doc, getDoc } from 'firebase/firestore'; 
-import { db } from '../config/firebase'; 
+import { useParams } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../config/firebase";
 import Navy from "./navbar";
-import './css/consul.css'
+import "./css/consul.css";
 
 function Consul() {
   const [consulta, setConsulta] = useState(null);
@@ -16,7 +16,7 @@ function Consul() {
       if (consultaSnapshot.exists()) {
         setConsulta(consultaSnapshot.data());
       } else {
-        console.log('No existe una consulta con ese ID!');
+        console.log("No existe una consulta con ese ID!");
       }
     };
 
@@ -27,14 +27,17 @@ function Consul() {
 
   return (
     <>
-    <Navy />
-    <div className="card">
-  <h2>{consulta.name} {consulta.lastName}</h2>
-  <p>Fecha: {consulta.date}</p>
-  <p>Hora: {consulta.time}</p>
-  <p>Comentario: {consulta.commit}</p>
-   <button className="btn-add-medicamento">Agregar Medicamento</button>
-</div>
+      <Navy />
+      <div className="card">
+        <h2>
+          {consulta.name} {consulta.lastName}
+        </h2>
+        <h3>Edad: {consulta.age}</h3>
+        <p>Fecha: {consulta.date}</p>
+        <p>Hora: {consulta.time}</p>
+        <p>Comentario: {consulta.commit}</p>
+        <button className="btn-add-medicamento">Agregar Medicamento</button>
+      </div>
     </>
   );
 }

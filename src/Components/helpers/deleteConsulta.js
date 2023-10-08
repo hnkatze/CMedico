@@ -1,9 +1,8 @@
-
-import { doc, deleteDoc } from 'firebase/firestore';
+import { doc, deleteDoc, getDoc, collection, query, where } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 
 const deleteConsulta = async (setProductList, id) => {
-  const productDoc = doc(db, "consultas", id);
+  const productDoc = doc(db, 'consultas', id);
 
   try {
     await deleteDoc(productDoc);
@@ -15,3 +14,4 @@ const deleteConsulta = async (setProductList, id) => {
 };
 
 export { deleteConsulta };
+
