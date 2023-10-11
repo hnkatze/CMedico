@@ -94,24 +94,36 @@ const Consulta = () => {
         <table>
           <thead>
             <tr>
+              <th>#/Folio</th>
               <th>Nombre</th>
-              <th>Apellido</th>
+              <th>Numero De Telefono</th>
               <th>Fecha</th>
               <th>Hora/Ingreso</th>
+              <th>Medicamentos/Usados</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
             {filteredProducts.map((consultas) => (
               <tr key={consultas.id}>
-                <td>{consultas.name}</td>
-                <td>{consultas.lastName}</td>
+                <td>{consultas.Folio}</td>
+                <td>
+                  {consultas.name} {consultas.lastName}
+                </td>
+                <td>{consultas.cell}</td>
                 <td>{consultas.date}</td>
                 <td>{consultas.time}</td>
+                <td>{consultas.medicUsed}</td>
                 <td>
                   <button
                     className="delete-button"
-                    onClick={() => deleteConsulta(setProductList, consultas.id)}
+                    onClick={() =>
+                      deleteConsulta(
+                        setProductList,
+                        consultas.id,
+                        consultas.medicUsed
+                      )
+                    }
                   >
                     <FaTrash />
                   </button>

@@ -1,29 +1,216 @@
+/* Estilo para centrar el contenido en la página */
+.center-content {
+  display: flex;
+  flex-direction: column;
+  justify-content:flex-start;
+  align-items: center;
+  height: 100vh;
+  margin: 20px;
+  /* Ajusta la altura al 100% del viewport para centrar verticalmente */
+}
+
 .card {
-    max-width: 400px; /* Tamaño máximo de la tarjeta */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    margin: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    background-color: #fff;
-    text-align: center;
-  }
+  max-width: 400px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  text-align: left;
+  margin: 0 auto;
+  transition: transform 0.3s ease;
+}
 
-  /* Estilos para el botón "Agregar Medicamento" */
-  .btn-add-medicamento {
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    font-size: 16px;
-    margin: 10px auto;
-    cursor: pointer;
-  }
 
-  /* Cambia el cursor a un puntero cuando se pasa sobre el botón */
-  .btn-add-medicamento:hover {
-    background-color: #45a049;
+
+.card-header {
+  background-color: #007bff;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.card-title {
+  font-size: 24px;
+  margin: 10px 0;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-text {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.list-unstyled {
+  padding: 0;
+  margin: 0;
+}
+
+.list-unstyled li {
+  list-style: none;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.card-footer {
+  background-color: #f8f9fa;
+  padding: 10px 0;
+  text-align: center;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos para los elementos <dialog> */
+dialog {
+  border: 0;
+  background-color: none;
+
+}
+
+
+
+/* Estilos para el formulario dentro del dialog */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+}
+
+/* Estilos para los botones */
+.btn-close {
+  padding: 8px 16px;
+  font-size: 14px;
+  background-color: #ff0000;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-close:hover {
+  background-color: #d13939ce;
+}
+
+.btn-submit {
+  padding: 8px 16px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-submit:hover {
+  background-color: #0056b3;
+}
+
+.custom-table {
+  width: 40%;
+}
+
+.custom-table th,
+.custom-table td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+.modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Estilos para el modal en sí */
+.modal-content {
+  background: #fff;
+  border-radius: 5px;
+  max-width: 400px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.modal-button {
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 70%;
+  margin: 5px;
+}
+
+.modal-button.secondary {
+  background-color: #ccc;
+  width: 30%;
+}
+
+/* Estilos para el botón de cierre */
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
