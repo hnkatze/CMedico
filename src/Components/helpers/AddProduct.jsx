@@ -1,9 +1,6 @@
 import { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
 function AddProduct({ onclose, onSubmit }) {
-  const [startDate, setStartDate] = useState(new Date());
   const [newProductName, setNewProductName] = useState("");
   const [newProductBrand, setNewProductBrand] = useState("");
   const [newProductAmount, setNewProductAmount] = useState(0);
