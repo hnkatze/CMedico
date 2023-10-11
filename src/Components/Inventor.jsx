@@ -12,12 +12,9 @@ import {
   collection,
   addDoc,
   message,
-  Modal,
   Popconfirm,
   Button,
 } from "./helpers/";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import Navy from "./navbar";
 
 function Inventor() {
@@ -29,7 +26,6 @@ function Inventor() {
   const [updateProductAmount, setUpdateProductAmount] = useState(0);
   const [updateProductEndDate, setUpdateProductEndDate] = useState("");
   const [editingProductId, setEditingProductId] = useState(null);
-  const [startDate, setStartDate] = useState(new Date());
   const [messageApi, contextHolder] = message.useMessage();
 
   const openModal = () => {
@@ -55,7 +51,7 @@ function Inventor() {
     } catch (err) {
       messageApi.open({
         type: "success",
-        content: "No Se Obtener El Medicamento",
+        content: "No Se Puede Obtener El Medicamento",
       });
     }
   };
@@ -110,13 +106,6 @@ function Inventor() {
       })
     : productList;
 
-  const dateget = (startDate) => {
-    const dia = startDate.getDate();
-    const mes = startDate.getMonth() + 1;
-    const year = startDate.getFullYear();
-
-    return dia + "/" + mes + "/" + year;
-  };
   const cancel = (e) => {
     console.log(e);
     message.error("Usuario Cancelo La Operacion ");
@@ -205,12 +194,11 @@ function Inventor() {
             />
             <div>
               <label htmlFor="">Cambiar Fecha De Vencimiento</label>
-              <DatePicker
-                selected={startDate}
-                onChange={(e) => {
-                  setStartDate(e);
-                  setUpdateProductEndDate(dateget(e));
-                }}
+              <input
+                type="date"
+                placeholder="Seleccione fecha"
+                value={updateProductEndDate}
+                onChange={(e) => setUpdateProductEndDate(e.target.value)}
               />
             </div>
             <button className="submit-button" onClick={handleUpdate}>
