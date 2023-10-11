@@ -1,5 +1,4 @@
-
-import { doc, deleteDoc } from 'firebase/firestore';
+import { doc, deleteDoc, getDoc, collection, query, where } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import { message } from 'antd';
 
@@ -25,3 +24,4 @@ const deleteConsulta = async (setProductList, id, medicUsed) => {
 };
 
 export { deleteConsulta };
+

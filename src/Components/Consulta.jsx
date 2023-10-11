@@ -11,7 +11,11 @@ import {
   message,
   deleteConsulta,
   AddConsulta,
+  Card,
+  Row,
+  Col,
 } from "./helpers/";
+import { FireOutlined } from "@ant-design/icons";
 
 const Consulta = () => {
   const [isOpen, setOpen] = useState(false);
