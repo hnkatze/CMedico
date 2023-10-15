@@ -10,7 +10,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import Navy from "./navbar";
-import "./css/consul.css";
+import "../css/consul.css";
 import { AddUsedProduct, updateCommit } from "../helpers";
 import { Form, Table } from "react-bootstrap";
 

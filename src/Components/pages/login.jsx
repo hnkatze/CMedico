@@ -1,13 +1,16 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from "react";
-import './css/login.css';    
+import "../css/login.css";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (window.location.search.includes("username") && window.location.search.includes("password")) {
+    if (
+      window.location.search.includes("username") &&
+      window.location.search.includes("password")
+    ) {
       const params = new URLSearchParams(window.location.search);
       setUsername(params.get("username"));
       setPassword(params.get("password"));
@@ -52,6 +55,7 @@ const Login = () => {
             name="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            required
           />
         </div>
         <div className="form-group">
@@ -62,6 +66,7 @@ const Login = () => {
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </div>
         {error && <div className="error">{error}</div>}

@@ -1,4 +1,4 @@
-import './css/errorpage.css'; // Importa el archivo de estilos CSS
+import "../css/errorpage.css"; // Importa el archivo de estilos CSS
 
 const ErrorPage = () => {
   return (

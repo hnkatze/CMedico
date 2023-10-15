@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FaTrash, FaEdit } from "react-icons/fa";
-import "./css/Inventory.css";
+import "../css/Inventory.css";
 import { db } from "../../config/firebase";
 import {
   deleteProduct,

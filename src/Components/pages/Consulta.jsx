@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Navy from "./navbar";
 import { db } from "../../config/firebase";
 import { FaTrash, FaSignInAlt } from "react-icons/fa";
-import "../Components/css/consulta.css";
+import "../css/consulta.css";
 import { Link } from "react-router-dom";
 import {
   getDocs,
