@@ -1,60 +1,70 @@
-// eslint-disable-next-line no-unused-vars
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import "../css/login.css";
-const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+import { useNavigate } from "react-router-dom";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../../config/firebase";
+import { message } from "antd";
 
-  useEffect(() => {
-    if (
-      window.location.search.includes("username") &&
-      window.location.search.includes("password")
-    ) {
-      const params = new URLSearchParams(window.location.search);
-      setUsername(params.get("username"));
-      setPassword(params.get("password"));
+const Login = () => {
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const checkUser = async (data) => {
+    try {
+      const usersCollection = collection(db, "Users");
+      const q = query(
+        usersCollection,
+        where("userName", "==", data.userName),
+        where("password", "==", data.password)
+      );
+      const querySnapshot = await getDocs(q);
+
+      if (querySnapshot.size === 1) {
+        const userDoc = querySnapshot.docs[0];
+        const userType = userDoc.data().userType;
+
+        if (userType === 1 || userType === 2) {
+          navigate("/Home", {
+            replace: true,
+            state: { Logged: true, userType },
+          });
+        }
+      } else {
+        message.open({
+          type: "error",
+          content: "Usuario o contraseña incorrectos",
+        });
+      }
+    } catch (error) {
+      console.error("Error al verificar el usuario:", error);
     }
-  }, []);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const data = {
-      username,
-      password,
+      userName: userName,
+      password: password,
     };
 
-    fetch("/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          window.location.href = "/";
-        } else {
-          setError(data.error);
-        }
-      });
+    checkUser(data);
   };
 
   return (
     <div className="login">
-      <h1>Centro Medico</h1>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
+      <h1 className="title">Centro Médico Del Valle</h1>
+      <h2 className="subtitle">Inicio de Sesión</h2>
+      <form onSubmit={handleSubmit} autoComplete="off">
         <div className="form-group">
           <label htmlFor="username">Usuario</label>
           <input
             type="text"
             id="username"
             name="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
+            autoComplete="off"
             required
           />
         </div>
@@ -66,11 +76,13 @@ const Login = () => {
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            autoComplete="off"
             required
           />
         </div>
-        {error && <div className="error">{error}</div>}
-        <button type="submit">Entrar</button>
+        <button type="submit" className="submit-button">
+          Entrar
+        </button>
       </form>
     </div>
   );
