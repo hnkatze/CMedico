@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function AddProduct({ onclose, onSubmit }) {
+function AddMedict({ onclose, onSubmit }) {
   const [newProductName, setNewProductName] = useState("");
   const [newProductBrand, setNewProductBrand] = useState("");
   const [newProductAmount, setNewProductAmount] = useState(0);
@@ -70,4 +70,4 @@ function AddProduct({ onclose, onSubmit }) {
   );
 }
 
-export default AddProduct;
+export default AddMedict;

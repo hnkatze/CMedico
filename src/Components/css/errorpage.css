@@ -1,0 +1,21 @@
+/* ErrorPage.css */
+.error-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh; /* El 70% de la altura de la pantalla */
+  }
+  
+  .error-content {
+    text-align: center;
+  }
+  
+  .error-content h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+  }
+  
+  .error-content p {
+    font-size: 1.5rem;
+  }
+  
