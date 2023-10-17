@@ -1,16 +1,23 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FaList, FaCalendar, FaSignOutAlt } from "react-icons/fa";
 import "../css/homepage.css";
 import Navy from "./navbar";
+import { useAuth } from "../routes/AuthProvider";
 
 function HomePage() {
-  const { state } = useLocation();
+  const { logout, userType } = useAuth();
+
+  const inventoryLinkTo = userType === 1 ? "/Inventor" : "/Inven";
+
+  const handleLogout = () => {
+    logout();
+  };
   return (
     <>
       <Navy />
       <div className="navigation-links-container">
-        {state?.userType === 1 ? (
-          <Link to="/Inventor" className="navigation-link">
+        {userType === 1 ? (
+          <Link to={inventoryLinkTo} className="navigation-link">
             <div className="navigation-link-icon">
               <FaList />
             </div>
@@ -31,7 +38,7 @@ function HomePage() {
           </div>
           <span>Consultas</span>
         </Link>
-        <Link to="/" replace className="navigation-link">
+        <Link to="/" replace className="navigation-link" onClick={handleLogout}>
           <div className="navigation-link-icon">
             <FaSignOutAlt />
           </div>

@@ -2,10 +2,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useAuth } from "../routes/AuthProvider";
 
 function Navy() {
-  const { state } = useLocation();
+  const { logout, userType } = useAuth();
+
+  const inventoryLinkTo = userType === 1 ? "/Inventor" : "/Inven";
+
+  const handleLogout = () => {
+    logout();
+  };
   return (
     <>
       <Navbar bg="dark" variant="dark">
@@ -17,16 +24,12 @@ function Navy() {
             <Link to="/Consulta" className="nav-link">
               Consultas
             </Link>
-            {state?.userType === 1 ? (
-              <Link to="/Inventor" className="nav-link">
-                Inventario
-              </Link>
-            ) : (
-              <Link to="/Inven" className="nav-link">
-                Inventario
-              </Link>
-            )}
-            <Link to="/" replace className="nav-link">
+
+            <Link to={inventoryLinkTo} className="nav-link">
+              Inventario
+            </Link>
+
+            <Link to="/" replace className="nav-link" onClick={handleLogout}>
               Cerrar Sesion
             </Link>
           </Nav>

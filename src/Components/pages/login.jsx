@@ -1,14 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../css/login.css";
 import { useNavigate } from "react-router-dom";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { message } from "antd";
+import { useAuth } from "../routes/AuthProvider";
 
 const Login = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
+
+  useEffect(() => {
+    window.history.pushState(null, document.title, window.location.href);
+    window.addEventListener("popstate", function (event) {
+      window.history.pushState(null, document.title, window.location.href);
+    });
+  }, []);
 
   const checkUser = async (data) => {
     try {
@@ -25,9 +34,10 @@ const Login = () => {
         const userType = userDoc.data().userType;
 
         if (userType === 1 || userType === 2) {
+          login(userType);
           navigate("/Home", {
             replace: true,
-            state: { Logged: true, userType },
+            state: { userType },
           });
         }
       } else {
